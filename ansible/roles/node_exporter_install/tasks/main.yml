@@ -1,6 +1,9 @@
 #SPDX-License-Identifier: MIT-0
 ---
-# tasks file for node_exporter_install
+- name: Set timezone to Europe/Moscow
+  community.general.timezone:
+    name: Europe/Moscow
+
 - name: Ensure group "node_exporter" exists
   ansible.builtin.group:
     name: node_exporter

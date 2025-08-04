@@ -1,4 +1,9 @@
 ---
+
+- name: Set timezone to Europe/Moscow
+  community.general.timezone:
+    name: Europe/Moscow
+
 - name: Install dependencies
   ansible.builtin.apt:
     name:
