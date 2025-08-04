@@ -1,0 +1,42 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for node_exporter_install
+- name: Ensure group "node_exporter" exists
+  ansible.builtin.group:
+    name: node_exporter
+    state: present
+
+- name: Create service account for node exporter
+  ansible.builtin.user:
+    name: node_exporter
+    group: node_exporter
+    shell: /bin/false
+    create_home: no
+    comment: 'Created by Ansible'
+
+- name: Download and extract node exporter archive
+  ansible.builtin.unarchive:
+    src: https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.9.1.linux-amd64.tar.gz
+    dest: /usr/local/bin
+    remote_src: yes
+    owner: node_exporter
+    group: node_exporter
+    extra_opts: ['--strip-components=1', '--show-stored-names']
+
+- name: Create systemd unit to run "node_exporter"
+  ansible.builtin.template:
+    src: node_exporter.j2
+    dest: /etc/systemd/system/node_exporter.service
+    mode: 0640
+  notify: 
+    - Reload systemd
+    - Restart node_exporter service
+
+- name: Ensure "node_exporter" service is enabled
+  ansible.builtin.service:
+    name: node_exporter
+    state: started
+    enabled: yes
+    
+
+

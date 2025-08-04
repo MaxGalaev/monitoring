@@ -1,0 +1,8 @@
+---
+# Install docker
+- name: Install node_exporter
+  hosts: bind_servers
+  remote_user: max
+  become: true
+  roles:
+    - role: node_exporter_install
