@@ -1,0 +1,19 @@
+---
+- name: Install promtail 
+  ansible.builtin.apt:
+    deb: https://github.com/grafana/loki/releases/download/v3.5.3/promtail_3.5.3_amd64.deb
+
+- name: Config promtail
+  ansible.builtin.template:
+    src: config.j2
+    dest: /etc/promtail/config.yml
+    mode: 0640
+    owner: promtail
+  notify: Restart promtail
+    
+- name: Ensure promtail service is enabled
+  ansible.builtin.service:
+    name: promtail
+    state: started
+    enabled: yes
+

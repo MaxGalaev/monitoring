@@ -1,0 +1,8 @@
+---
+# Install docker
+- name: Install promtail
+  hosts: bind_servers
+  remote_user: max
+  become: true
+  roles:
+    - role: promtail_install
