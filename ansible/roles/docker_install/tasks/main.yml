@@ -20,7 +20,7 @@
     state: directory
     mode: '0755'
 
-- name: Add GPG Docker key and 
+- name: Add GPG Docker key and repo
   block:
     - name: Add key
       ansible.builtin.get_url:
