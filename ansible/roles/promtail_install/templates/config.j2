@@ -9,11 +9,12 @@ clients:
   - url: http://192.168.1.199:3100/loki/api/v1/push
 
 scrape_configs:
-- job_name: system
-  static_configs:
-  - targets:
-      - localhost
-    labels:
-      job: varlogs
-      __path__: /var/log/*log
-      stream: stdout
+  - job_name: journal
+    journal:
+      max_age: 12h
+      labels:
+        job: systemd-journal
+        hostname: ''
+    relabel_configs:
+      - source_labels: ["__journal_systemd_unit"]
+        target_label: "unit"

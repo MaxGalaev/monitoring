@@ -3,6 +3,15 @@
   ansible.builtin.apt:
     deb: https://github.com/grafana/loki/releases/download/v{{ promtail_version }}/promtail_{{ promtail_version }}_amd64.deb
 
+
+- name: Add permission to logs for promtail user
+  ansible.builtin.user:
+    name: promtail
+    groups:
+      - adm
+      - systemd-journal
+    append: yes
+    
 - name: Config promtail
   ansible.builtin.template:
     src: config.j2
