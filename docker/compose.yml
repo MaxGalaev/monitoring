@@ -8,7 +8,7 @@ services:
     command: '--config.file=/etc/prometheus/prometheus.yml' 
     volumes:
       - ./prometheus:/etc/prometheus
-      - /prom_data:/prometheus
+      - prom_data:/prometheus
     ports:
       - 9090:9090
     restart: always
@@ -24,15 +24,21 @@ services:
     restart: always
     volumes:
       - ./grafana:/etc/grafana/provisioning/datasources
+      - grafana_data:/var/lib/grafana
   
   loki:
     environment:
       - TZ=Europe/Moscow
     image: grafana/loki
     container_name: loki
+    command: '-config.file=/etc/loki/local-config.yaml'
+    volumes:
+      - loki_data:/tmp/loki
     ports:
       - 3100:3100
     restart: always
 
 volumes:
   prom_data:
+  loki_data:
+  grafana_data:
