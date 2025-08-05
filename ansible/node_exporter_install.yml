@@ -1,5 +1,5 @@
 ---
-# Install docker
+# Install node_exporter
 - name: Install node_exporter
   hosts: bind_servers
   remote_user: max

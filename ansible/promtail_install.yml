@@ -1,5 +1,5 @@
 ---
-# Install docker
+# Install promtail
 - name: Install promtail
   hosts: bind_servers
   remote_user: max

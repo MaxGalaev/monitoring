@@ -1,3 +1,4 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # defaults file for promtail_install
+promtail_version: "3.5.3"

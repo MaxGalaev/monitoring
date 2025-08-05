@@ -1,3 +1,4 @@
 #SPDX-License-Identifier: MIT-0
 ---
 # defaults file for node_exporter_install
+node_exporter_vertsion: "1.9.1"

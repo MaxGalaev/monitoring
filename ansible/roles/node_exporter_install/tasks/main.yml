@@ -19,7 +19,7 @@
 
 - name: Download and extract node exporter archive
   ansible.builtin.unarchive:
-    src: https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.9.1.linux-amd64.tar.gz
+    src: https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_vertsion }}}/node_exporter-{{ node_exporter_vertsion }}.linux-amd64.tar.gz
     dest: /usr/local/bin
     remote_src: yes
     owner: node_exporter
